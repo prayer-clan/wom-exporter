@@ -53,10 +53,9 @@ with open('clan_members.json', 'w') as json_file:
     json_file.write(json_string)
 
 
-"""Next Steps
-    - I'm lazy and just put the JSON into a JSON to CSV converter
-    -
-
-
 """
-# then I'm lazy and just put the JSON into 
+Next Steps
+    - I'm lazy and just put the JSON into a JSON to CSV converter
+    - https://www.convertcsv.com/json-to-csv.htm
+    - Then import to Google Sheets
+"""
