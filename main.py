@@ -47,8 +47,16 @@ while offset <= max_offset:
     # add these to our hiscores_json 
     hiscores_json.extend(hiscores_data)
 
-
 # save the JSON into a file
 with open('clan_members.json', 'w') as json_file:
     json_string = json.dumps(hiscores_json)
     json_file.write(json_string)
+
+
+"""Next Steps
+    - I'm lazy and just put the JSON into a JSON to CSV converter
+    -
+
+
+"""
+# then I'm lazy and just put the JSON into 
