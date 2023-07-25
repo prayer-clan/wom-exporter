@@ -44,13 +44,11 @@ while offset <= max_offset:
     # get a reference to the JSON data from the response
     hiscores_data = hiscores_response.json()
 
-    # iterate over 
+    # add these to our hiscores_json 
     hiscores_json.extend(hiscores_data)
-    # for player_record in hiscores_data:
-    #     hiscores_json.append(player_record)
-    #     print(f'appending {player_record}')
 
-json_string = json.dumps(hiscores_json)
+
+# save the JSON into a file
 with open('clan_members.json', 'w') as json_file:
-    print('saving...')
+    json_string = json.dumps(hiscores_json)
     json_file.write(json_string)
