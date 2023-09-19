@@ -1,15 +1,22 @@
-from wom import Client, Player
+from wom import Client, GroupMembership, PlayerDetail
 
 
-async def getPlayers(players: list[str]) -> list[Player]:
+async def get_player_details(client: Client, player_id: id) -> PlayerDetail:
+    result = await client.players.get_details_by_id(player_id)
+    if not result.is_ok:
+        raise ValueError(result.unwrap_err())
+    return result.unwrap()
+
+
+async def get_players_details_from_group(memberships: list[GroupMembership]) -> list[PlayerDetail]:
     client = Client()
     await client.start()
-    result = await client.players.search_players("P 2 G R", limit=1)
-    # result = result.is_ok ? result.unwrap() : result.unwrap_err()
-    if result.is_ok:
-        result = result.unwrap()
-    else:
-        result = result.unwrap_err()
-        raise ValueError(result)
-    await client.close()
-    return result
+    player_details = []
+    for member in memberships:
+        result = await client.players.get_details_by_id(member.player.id)
+        if result.is_ok:
+            player_details.append(result.unwrap())
+        else:
+            raise ValueError(result.unwrap_err())
+ 
+    return player_details

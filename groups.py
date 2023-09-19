@@ -5,9 +5,7 @@ import requests
 from wom import Client, GroupDetail
 
 
-async def getClanMembers(groupId: int) -> GroupDetail:
-    client = Client()
-    await client.start()
+async def get_group_details(client: Client, groupId: int) -> GroupDetail:
     result = await client.groups.get_details(groupId)
 
     if result.is_ok:
@@ -16,11 +14,10 @@ async def getClanMembers(groupId: int) -> GroupDetail:
         result = result.unwrap_err()
         raise ValueError(result)
 
-    await client.close()
     return result
 
 
-def getClanMembersSync(groupId, metric):
+def get_group_details_sync(groupId, metric):
     # request clan details from WOM
     groups_response = requests.get("https://api.wiseoldman.net/v2/groups?name=Prayer&limit=1")
 
