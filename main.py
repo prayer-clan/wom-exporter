@@ -25,25 +25,26 @@ async def main():
     target = len(group.memberships)
     current = 0
 
-    for m in group.memberships[0:target]:
+    for m in group.memberships:
         await asyncio.sleep(0.75)
         pd = await players.get_player_details(client, m.player.id)
 
-        total_level = pd.latest_snapshot.data.skills[Skills.Overall].level
-        combat_level = pd.combat_level
-        player_build = pd.player.build.value
-        role = m.membership.role.value
+        if pd.latest_snapshot.data.skills[Skills.Overall].level >= 1500:
+            continue
+        if pd.combat_level >=110:
+            continue
+        if pd.player.build.value != "main":
+            continue
 
-        if total_level < 1500 and combat_level < 110 and player_build == "main":
-            player = [
-                m.player.display_name,
-                combat_level,
-                total_level,
-                player_build,
-                role,
-            ]
+        player = [
+            m.player.display_name,
+            pd.combat_level,
+            pd.latest_snapshot.data.skills[Skills.Overall].level,
+            pd.player.build.value,
+            m.membership.role.value,
+        ]
 
-            player_details.append(player)
+        player_details.append(player)
 
         current += 1
         os.system("cls" if os.name == "nt" else "clear")
