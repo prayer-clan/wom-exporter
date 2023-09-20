@@ -35,12 +35,13 @@ async def main():
         role = m.membership.role.value
 
         if total_level < 1500 and combat_level < 110 and player_build == "main":
-            player = []
-            player.append(m.player.display_name)
-            player.append(combat_level)
-            player.append(total_level)
-            player.append(player_build)
-            player.append(role)
+            player = [
+                m.player.display_name,
+                combat_level,
+                total_level,
+                player_build,
+                role,
+            ]
 
             player_details.append(player)
 
