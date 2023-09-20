@@ -160,3 +160,6 @@ cython_debug/
 #.idea/
 
 .vscode/
+
+# Main.py returns CSV files
+*.csv
